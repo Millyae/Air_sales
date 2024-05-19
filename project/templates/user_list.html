@@ -1,0 +1,29 @@
+<!-- user_list.html -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+    <h1>Список пользователей</h1>
+    <ul>
+        {% for user in object_list %}
+            <li>{{ user.full_name }}</li>
+            <li>{{user.date_of_birth}}</li>
+            <li>{{user.phone_number}}</li>
+            {% if user.documentation %}
+                <td>{{ user.documentation.citizenship }}</td>
+                <td>{{ user.documentation.country }}</td>
+                <td>{{ user.documentation.passport_series }}</td>
+                <td>{{ user.documentation.passport_number }}</td>
+            {% else %}
+                <td colspan="4">Документы не указаны</td>
+            {% endif %}
+        {% empty %}
+            <li>Нет пользователей</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

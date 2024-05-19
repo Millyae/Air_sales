@@ -1,0 +1,57 @@
+<!-- user_forms.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <style>
+        body {
+            background-color: LightSteelBlue;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        form {
+            border-radius: 10px;
+            background-color: white;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            height: 20px;
+            font-size: 20px;
+            padding: 5px;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            width: 150px;
+            height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <h1>Личный кабинет</h1>
+        {% csrf_token %}
+        <input type="text" name="full_name" id="id_full_name" placeholder="Фамилия Имя Отчество">
+        <br><br>
+        <input type="text" name="date_of_birth" id="id_date_of_birth" pattern="[0-3][0-9].[0-1][0-9].[1-2][0-9]{3}" placeholder="ДД.ММ.ГГГГ">
+        <br><br>
+        <input type="text" name="phone_number" id="id_phone_number" placeholder="Номер телефона" >
+        <br><br>
+        <button type="submit">Редактировать</button>
+    </form>
+</body>
+</html>
