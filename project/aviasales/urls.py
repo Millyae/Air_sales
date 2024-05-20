@@ -10,4 +10,6 @@ urlpatterns = [
     path('favorite_tickets/<int:user_id>/', views.get_favorite_tickets, name='favorite_tickets'),
     path('tickets/', views.get_tickets, name='get_tickets'),
     path('purchased_tickets/<int:user_id>/', views.get_purchased_tickets, name='get_purchased_tickets'),
+    path('user-settings/<int:user_id>/', views.get_user_settings, name='get_user_settings'),
 ]
+
