@@ -2,7 +2,7 @@ from django.http import HttpResponseNotFound, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from .forms import EmailForm, NameForm, DateOfBirthForm, PhoneForm, PassportForm
-from .models import Favorites, Tickets, PurchasedTickets
+from .models import *
 
 @require_http_methods(["POST"])
 def validate_email(request):
@@ -67,3 +67,18 @@ def get_purchased_tickets(request, user_id):
     purchased_tickets = PurchasedTickets.objects.filter(user__id=user_id)
     tickets_data = list(purchased_tickets.values())
     return JsonResponse({'purchased_tickets': tickets_data})
+
+def get_user_settings(request, user_id):
+    if request.method == 'GET':
+        try:
+            user_settings = Settings.objects.get(user__id=user_id)
+            settings_data = {
+                'interface_language': user_settings.interface_language,
+                'city_of_residence': user_settings.city_of_residence,
+                'currency': user_settings.currency
+            }
+            return JsonResponse({'user_settings': settings_data})
+        except Settings.DoesNotExist:
+            return JsonResponse({'error': 'User settings not found for this user'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
